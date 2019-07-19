@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
-import FruitsTable from "./components/FruitsTable";
-import FruitFilters from "./components/FruitFilters";
-import FilterMasterMind from "./components/FilterMasterMind";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import React, { useState, useEffect } from 'react';
+import FruitsTable from './components/FruitsTable';
+import FruitFilters from './components/FruitFilters';
+import FilterMasterMind from './components/FilterMasterMind';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function() {
+  const [allFruits, setAllFruits] = useState([]);
+  const [fruits, setFruits] = useState();
+
   useEffect(() => {
     const allFruits = [
-      { name: "Apple", color: "red", country: "USA" },
-      { name: "Banana", color: "yellow", country: "Mexico" },
-      { name: "Kiwi", color: "green", country: "Australia" },
-      { name: "Apple", color: "green", country: "Mexico" },
-      { name: "Pineapple", color: "yellow", country: "Brazil" },
-      { name: "Avocado", color: "green", country: "Brazil" }
+      { name: 'Apple', color: 'red', country: 'USA' },
+      { name: 'Banana', color: 'yellow', country: 'Mexico' },
+      { name: 'Kiwi', color: 'green', country: 'Australia' },
+      { name: 'Apple', color: 'green', country: 'Mexico' },
+      { name: 'Pineapple', color: 'yellow', country: 'Brazil' },
+      { name: 'Avocado', color: 'green', country: 'Brazil' },
     ];
     setTimeout(() => {
       setAllFruits(allFruits);
@@ -20,22 +23,19 @@ export default function() {
     }, 500);
   }, []);
 
-  const [allFruits, setAllFruits] = useState([]);
-  const [fruits, setFruits] = useState([]);
-
+  const checkAgainstFilter = (selectedFilters, attribute) =>
+    selectedFilters.length > 0 ? selectedFilters.includes(attribute) : true;
   const findMatchingFruits = ({ selectedColors, selectedCountries }) => {
     const fruitsMatchingFilters = allFruits.filter(
       fruit =>
-        fruit.color.includes(selectedColors) &&
-        fruit.country.includes(selectedCountries)
+        checkAgainstFilter(selectedColors, fruit.color) &&
+        checkAgainstFilter(selectedCountries, fruit.country)
     );
     setFruits(fruitsMatchingFilters);
   };
   return (
     <React.Fragment>
-      {fruits.length < 1 ? (
-        <CircularProgress />
-      ) : (
+      {fruits ? (
         <React.Fragment>
           <FilterMasterMind fruits={fruits}>
             {({ colorOptions, countryOptions }) => (
@@ -48,6 +48,8 @@ export default function() {
           </FilterMasterMind>
           <FruitsTable fruits={fruits} />
         </React.Fragment>
+      ) : (
+        <CircularProgress />
       )}
     </React.Fragment>
   );
