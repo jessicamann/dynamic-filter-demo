@@ -1,46 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import FruitsTable from './components/FruitsTable';
-import FruitFilters from './components/FruitFilters';
+import CarsTable from './components/CarsTable';
+import CarFilters from './components/CarFilters';
 import FilterMasterMind from './components/FilterMasterMind';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import data from './data.json';
 
-export default function() {
-  const [allFruits, setAllFruits] = useState([]);
-  const [fruits, setFruits] = useState();
+export default function CarPage() {
+  const [allCars, setAllCars] = useState([]);
+  const [cars, setCars] = useState();
 
   useEffect(() => {
-    const allFruits = data;
+    const allCars = data;
     setTimeout(() => {
-      setAllFruits(allFruits);
-      setFruits(allFruits);
+      setAllCars(allCars);
+      setCars(allCars);
     }, 500);
   }, []);
 
   const checkAgainstFilter = (selectedFilters, attribute) =>
     selectedFilters.length > 0 ? selectedFilters.includes(attribute) : true;
-  const findMatchingFruits = ({ selectedModels, selectedMake }) => {
-    const fruitsMatchingFilters = allFruits.filter(
+  const findMatchingCars = ({ selectedModels, selectedMake }) => {
+    const carsMatchingFilters = allCars.filter(
       car =>
         checkAgainstFilter(selectedMake, car.make) &&
         checkAgainstFilter(selectedModels, car.model)
     );
-    setFruits(fruitsMatchingFilters);
+    setCars(carsMatchingFilters);
   };
   return (
     <React.Fragment>
-      {fruits ? (
+      {cars ? (
         <React.Fragment>
-          <FilterMasterMind fruits={fruits}>
+          <FilterMasterMind cars={cars}>
             {({ makeOptions, modelOptions }) => (
-              <FruitFilters
+              <CarFilters
                 makeOptions={makeOptions}
                 modelOptions={modelOptions}
-                filterApplied={findMatchingFruits}
+                filterApplied={findMatchingCars}
               />
             )}
           </FilterMasterMind>
-          <FruitsTable fruits={fruits} />
+          <CarsTable cars={cars} />
         </React.Fragment>
       ) : (
         <CircularProgress />

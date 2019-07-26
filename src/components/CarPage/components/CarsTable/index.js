@@ -2,7 +2,7 @@ import React from 'react';
 import Table from '@material-ui/core/Table';
 import { TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
 
-export default function FruitsTable({ fruits }) {
+export default function CarsTable({ cars }) {
   return (
     <Table>
       <TableHead>
@@ -13,7 +13,7 @@ export default function FruitsTable({ fruits }) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {fruits.map(({ id, make, model }, index) => (
+        {cars.map(({ id, make, model }, index) => (
           <TableRow key={make + index}>
             <TableCell>{id}</TableCell>
             <TableCell>{make}</TableCell>

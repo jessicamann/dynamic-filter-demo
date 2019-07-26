@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Select, MenuItem } from '@material-ui/core';
+import { Select, MenuItem, Button } from '@material-ui/core';
 import styled from 'styled-components';
 
 const StyledSelect = styled(Select)`
-  margin-right: 10px;
+  margin-right: 30px;
 `;
 
-export default function FruitFilters({
+export default function CarFilters({
   makeOptions = [],
   modelOptions = [],
   filterApplied = () => {},
@@ -28,6 +28,15 @@ export default function FruitFilters({
     filterApplied({
       selectedModels: selectedModels,
       selectedMake: selectedMake,
+    });
+  };
+
+  const clear = () => {
+    setSelectedMake([]);
+    setSelectedModels([]);
+    filterApplied({
+      selectedModels: [],
+      selectedMake: [],
     });
   };
 
@@ -58,6 +67,9 @@ export default function FruitFilters({
           </MenuItem>
         ))}
       </StyledSelect>
+      <Button size="small" variant="outlined" onClick={clear}>
+        Clear all
+      </Button>
     </React.Fragment>
   );
 }
