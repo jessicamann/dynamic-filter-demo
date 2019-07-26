@@ -1,10 +1,10 @@
-import { uniq } from "lodash-core";
+import { uniq } from 'lodash-core';
 
 export default function FilterMasterMind({ children, fruits = [] }) {
-  const allColorOptions = uniq(fruits.map(({ color }) => color));
-  const allCountryOptions = uniq(fruits.map(({ country }) => country));
+  const allMakeOptions = uniq(fruits.map(({ make }) => make));
+  const allModelOptions = uniq(fruits.map(({ model }) => model));
   return children({
-    colorOptions: allColorOptions,
-    countryOptions: allCountryOptions
+    makeOptions: allMakeOptions,
+    modelOptions: allModelOptions,
   });
 }

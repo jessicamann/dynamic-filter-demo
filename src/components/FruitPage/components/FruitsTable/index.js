@@ -1,23 +1,23 @@
-import React from "react";
-import Table from "@material-ui/core/Table";
-import { TableHead, TableCell, TableRow, TableBody } from "@material-ui/core";
+import React from 'react';
+import Table from '@material-ui/core/Table';
+import { TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
 
 export default function FruitsTable({ fruits }) {
   return (
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell>Color</TableCell>
-          <TableCell>Country</TableCell>
+          <TableCell>Id</TableCell>
+          <TableCell>Make</TableCell>
+          <TableCell>Model</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {fruits.map(({ name, color, country }, index) => (
-          <TableRow key={name + index}>
-            <TableCell>{name}</TableCell>
-            <TableCell>{color}</TableCell>
-            <TableCell>{country}</TableCell>
+        {fruits.map(({ id, make, model }, index) => (
+          <TableRow key={make + index}>
+            <TableCell>{id}</TableCell>
+            <TableCell>{make}</TableCell>
+            <TableCell>{model}</TableCell>
           </TableRow>
         ))}
       </TableBody>
